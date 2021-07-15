@@ -50,8 +50,10 @@
                     </div>
                     <div class="inputs-row">
                         <input type="text" id="encrypt" class="form-control">
-                        <button type="button" onclick="toEncryptElement()" class="btn btn-success">Encrypt</button>
-                        <button type="button" onclick="getCloneFromEncryptInput()" class="btn btn-info">Copy</button>
+                        <div class="buttons">
+                            <button type="button" onclick="toEncryptElement()" class="btn btn-success">Encrypt</button>
+                            <button type="button" onclick="getCloneFromEncryptInput()" class="btn btn-info">Copy</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -62,8 +64,10 @@
                     </div>
                     <div class="inputs-row">
                         <input type="text" id="decrypt" class="form-control">
-                        <button type="button" onclick="toDecryptElement()" class="btn btn-success">Decrypt</button>
-                        <button type="button" onclick="getCloneFromDecryptInput()" class="btn btn-info">Copy</button>
+                        <div class="buttons">
+                            <button type="button" onclick="toDecryptElement()" class="btn btn-success">Decrypt</button>
+                            <button type="button" onclick="getCloneFromDecryptInput()" class="btn btn-info">Copy</button>
+                        </div>
                         
                     </div>
                     <p style="color: rgb(255, 67, 67);" id="message"></p>
