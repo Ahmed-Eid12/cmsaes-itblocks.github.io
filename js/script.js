@@ -1,9 +1,13 @@
 $(document).ready(function () {
+  $("input[type=file]").val("");
+  $("#decrypted_file").val("");
   $("#clear").on("click", () => {
     $("#decrypt").val("");
     $("#encrypt").val("");
     $("#message").html("");
     $("#old_secret").prop("checked", true);
+    $("input[type=file]").val("");
+    $("#decrypted_file").val("");
   });
   $("#encrypt").on("keypress", () => {
     $("#message").html("");
@@ -11,7 +15,6 @@ $(document).ready(function () {
   $("#decrypt").on("keypress", () => {
     $("#message").html("");
   });
- 
 });
 
 /**
@@ -48,12 +51,8 @@ function decryptElement(str, keyPassed) {
       mode: CryptoJS.mode.ECB,
       padding: CryptoJS.pad.Pkcs7,
     });
-    window.onError = function(message, source, lineno, colno, error) {
-      console.log(message + source+ lineno+ colno+error)
-    }
   } catch (e) {
-    $.post(/* send exception to server? */);
-    console.log("Error" + e.message);
+    
   }
 
   // this is the decrypted data as a string
@@ -144,4 +143,110 @@ function copyToClipboard(elem) {
     target.textContent = "";
   }
   return succeed;
+}
+
+/**
+ *
+ * upload file to encrypt or decrypt
+ *
+ */
+
+// Check for the various File API support.
+if (window.File && window.FileReader && window.FileList && window.Blob) {
+  function showFile() {
+    var preview = document.getElementById("show-text");
+    var file = document.querySelector("input[type=file]").files[0];
+    var reader = new FileReader();
+
+    var textFile = /text.*/;
+
+    if (file.type.match(textFile)) {
+      reader.onload = function (event) {
+        // preview.innerHTML = event.target.result;
+        const fileText = decryptTxtFileValues(event.target.result);
+        $("#decrypted_file").val(fileText);
+      };
+    } else {
+      //  preview.innerHTML = "<span class='error'>It doesn't seem to be a text file!</span>";
+      alert("not txt file");
+    }
+    reader.readAsText(file);
+  }
+} else {
+  alert("Your browser is too old to support HTML5 File API");
+}
+
+function decryptTxtFileValues(Text) {
+  let splitted = Text.split("\r\n");
+  const keyType = $("input[name=secret]:checked").val();
+  var fileText;
+  let encryptedElement;
+  let elementRetrieved;
+  for (let index = 0; index < splitted.length; index++) {
+    if (splitted[index].includes("=")) {
+      let textEnc = splitted[index].split(/=(.+)/)[1];
+      let textPrefix = splitted[index].split(/=(.+)/)[0];
+      if (textEnc && textPrefix) {
+        encryptedElement = decryptElement(textEnc.trim(), keyType);
+        elementRetrieved = textPrefix + "=" + encryptedElement + "\n";
+      }
+      fileText += elementRetrieved;
+    }
+  }
+  return fileText.replace("undefined", "");
+}
+
+function encryptTxtFileValues() {
+  let value = $("#decrypted_file").val();
+  if (value) {
+    let splitted = value.split("\n");
+    const keyType = $("input[name=secret]:checked").val();
+    var fileText;
+    let encryptedElement;
+    let elementRetrieved;
+    for (let index = 0; index < splitted.length; index++) {
+      if (splitted[index].includes("=")) {
+        let textEnc = splitted[index].split(/=(.+)/)[1];
+        let textPrefix = splitted[index].split(/=(.+)/)[0];
+        if (textEnc && textPrefix) {
+          encryptedElement = encryptElement(textEnc.trim(), keyType);
+          elementRetrieved = textPrefix + "=" + encryptedElement + "\n";
+        }
+        fileText += elementRetrieved;
+      }
+    }
+  }
+  if(fileText) {
+    $("#decrypted_file").val('');
+    $("#decrypted_file").val(fileText.replace("undefined", ""));
+    alert("Encrypt Txt Successfully ...");
+  }
+  
+}
+
+function save() {
+  let data = $("#decrypted_file").val();
+  if( data ) {
+    let filename = prompt("Please enter file name:");
+    if(filename) {
+      var blob = new Blob([data], {type: 'text/csv'});
+      if(window.navigator.msSaveOrOpenBlob) {
+          window.navigator.msSaveBlob(blob, filename);
+      }
+      else{
+          var elem = window.document.createElement('a');
+          elem.href = window.URL.createObjectURL(blob);
+          elem.download = filename;        
+          document.body.appendChild(elem);
+          elem.click();        
+          document.body.removeChild(elem);
+      }
+    } else {
+      alert('Enter file name');
+    }
+    
+  } else {
+    alert("there is no data");
+  }
+  
 }
