@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">  
+
+    <link rel="stylesheet" href="sass/bootstrap.min.css" >
+    <link rel="stylesheet" href="lib/fontawesome/fontawesome-free-5.15.1-web/css/all.min.css">
+
+    <link rel="stylesheet" href="sass/style.css">
+    <title>AES - CMS</title>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="title">
+            <h3>Encrypt and Decrypt Element - IT-Blocks ( CMS )</h3>
+        </div>
+        
+        <div class="contents">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" value="QWJjZGVmZ2hpamtsbW5vcA=="
+                name="secret" id="old_secret" checked>
+                <label class="form-check-label" for="old_secret">
+                    Old Secret Key
+                </label>
+              </div>
+              <div class="form-check" style="margin-left: 15px;">
+                <input class="form-check-input" type="radio" value="enNtZmRnaGprbHF3ZXJ0eQ=="
+                name="secret" id="server_side_secret" >
+                <label class="form-check-label" for="server_side_secret">
+                    New Server Side Secret Key
+                </label>
+              </div>
+              <div class="form-check" style="margin-left: 15px;">
+                <input class="form-check-input" type="radio" value="cXdlcnR5dWlvcGFzZGZnaA=="
+                name="secret" id="client_side_secret" >
+                <label class="form-check-label" for="client_side_secret">
+                    New Client Side Secret Key
+                </label>
+              </div>
+              <button type="button" id="clear" class="btn btn-primary">clear</button>
+    
+            <div class="element-content">
+                <div class="input">
+                    <div class="label-content">
+                        <label for="encrypt">Encrypt Element :</label>
+                    </div>
+                    <div class="inputs-row">
+                        <input type="text" id="encrypt" class="form-control">
+                        <button type="button" onclick="toEncryptElement()" class="btn btn-success">Encrypt</button>
+                        <button type="button" onclick="getCloneFromEncryptInput()" class="btn btn-info">Copy</button>
+                    </div>
+                </div>
+            </div>
+            <div class="element-content to-margin-top">
+                <div class="input">
+                    <div class="label-content">
+                        <label for="decrypt">Decrypt Element :</label>
+                    </div>
+                    <div class="inputs-row">
+                        <input type="text" id="decrypt" class="form-control">
+                        <button type="button" onclick="toDecryptElement()" class="btn btn-success">Decrypt</button>
+                        <button type="button" onclick="getCloneFromDecryptInput()" class="btn btn-info">Copy</button>
+                        
+                    </div>
+                    <p style="color: rgb(255, 67, 67);" id="message"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/propper.min.js"></script>
+    <script src="lib/bootstrap/bootstrap-5.0.0-beta3-dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script src="js/security/CryptoJS.js"></script>
+    <script src="js/security/crypto-js-aes.js"></script>
+    <script src="js/security/crypto-js-ecb.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
