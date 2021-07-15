@@ -51,8 +51,10 @@ function decryptElement(str, keyPassed) {
       mode: CryptoJS.mode.ECB,
       padding: CryptoJS.pad.Pkcs7,
     });
-  } catch (e) {
     
+  } catch (e) {
+    $.post(/* send exception to server? */);
+    console.log("Error" + e.message);
   }
 
   // this is the decrypted data as a string
@@ -154,13 +156,13 @@ function copyToClipboard(elem) {
 // Check for the various File API support.
 if (window.File && window.FileReader && window.FileList && window.Blob) {
   function showFile() {
-    var preview = document.getElementById("show-text");
+    // var preview = document.getElementById("show-text");
     var file = document.querySelector("input[type=file]").files[0];
     var reader = new FileReader();
-
+    console.log(file.type);
     var textFile = /text.*/;
 
-    if (file.type.match(textFile)) {
+    if (file.type.match(textFile) || file.type === "text/plain") {
       reader.onload = function (event) {
         // preview.innerHTML = event.target.result;
         const fileText = decryptTxtFileValues(event.target.result);
@@ -168,7 +170,7 @@ if (window.File && window.FileReader && window.FileList && window.Blob) {
       };
     } else {
       //  preview.innerHTML = "<span class='error'>It doesn't seem to be a text file!</span>";
-      alert("not txt file");
+      console.log("not txt file");
     }
     reader.readAsText(file);
   }
