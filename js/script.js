@@ -8,17 +8,11 @@ $(document).ready(function () {
   $("#clear").on("click", () => {
     $("#decrypt").val("");
     $("#encrypt").val("");
-    $("#message").html("");
     $("#old_secret").prop("checked", true);
     $("input[type=file]").val("");
     $("#decrypted_file").val("");
   });
-  $("#encrypt").on("keypress", () => {
-    $("#message").html("");
-  });
-  $("#decrypt").on("keypress", () => {
-    $("#message").html("");
-  });
+  
 });
 
 /**
@@ -88,7 +82,7 @@ function toDecryptElement() {
   if (elementDecrypted) {
     $("#encrypt").val(elementDecrypted);
   } else {
-    $("#message").html("you try to decrypt wrong Text, try with another key.");
+    toaster('white', '#ff4b4b', "can not decrypt text, try another key");
   }
 }
 
@@ -170,13 +164,16 @@ if (window.File && window.FileReader && window.FileList && window.Blob) {
     if (file.type.match(textFile) || fielExtension === "properties" || fielExtension === "txt") {
       reader.onload = function (event) {
         // preview.innerHTML = event.target.result;
+        
         const fileText = decryptTxtFileValues(event.target.result);
         $("#decrypted_file").val(fileText);
       };
     } else {
       //  preview.innerHTML = "<span class='error'>It doesn't seem to be a text file!</span>";
-      alert("not ( txt or properties ) file");
-      $("input[type=file]").val('');
+      // can not upload file
+      $("#file").val('');
+      toaster('white', '#ff4b4b', "you have an error to upload ro decrypt file ...");
+      
       retrun ;
     }
     reader.readAsText(file);
@@ -202,7 +199,17 @@ function decryptTxtFileValues(Text) {
       fileText += elementRetrieved;
     }
   }
-  return fileText.replace("undefined", "");
+  if(fileText) {
+    // run toster
+    toaster('white', '#23c33c', "file uploaded and decrypted successfully ...");
+    return fileText.replace("undefined", "");
+  } else {
+    // can not upload file
+    $("input[type=file]").val('');
+    toaster('white', '#ff4b4b', "you have an error to upload ro decrypt file ...");
+    return ;
+  }
+  
 }
 
 function encryptTxtFileValues() {
@@ -226,9 +233,11 @@ function encryptTxtFileValues() {
     }
   }
   if(fileText) {
-    $("#decrypted_file").val('');
+    toaster('white', '#23c33c', "file encrypted successfully ...");
     $("#decrypted_file").val(fileText.replace("undefined", ""));
-    alert("Encrypt Txt Successfully ...");
+    $('.file-encrypt').toast('show');
+  } else {
+    toaster('white', '#ff4b4b', "you have an error .");
   }
   
 }
@@ -258,4 +267,18 @@ function save() {
     alert("there is no data");
   }
   
+}
+
+function toaster(textColor, backColor, message) {
+  var x = document.getElementById("toster");
+  x.className = "show";
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+
+  $('#toster p').html(message);
+  $('#toster').css({
+    "color": textColor,
+    "background-color": backColor,
+    "border-radius": 10+"px",
+    "box-shadow": "0 0 30px #cdcdcd"
+  })
 }

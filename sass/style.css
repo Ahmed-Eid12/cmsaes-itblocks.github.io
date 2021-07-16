@@ -79,29 +79,92 @@ body {
   height: 40%;
 }
 
-@media only screen and (max-width: 1000px) {
-  body {
-    background-color: lightblue;
-  }
-  .inputs-row {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-  }
-}
-
 a.help {
   border-radius: 50%;
 }
 
 #accordionExample {
   margin-top: 20px;
+}
+
+body {
+  position: relative;
+}
+
+@media only screen and (max-width: 1000px) {
+  body {
+    display: none;
+  }
+}
+
+div#toster {
+  visibility: hidden;
+  width: 350px;
+  margin-left: -125px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  position: fixed;
+  z-index: 100000;
+  left: 10%;
+  bottom: 30px;
+  font-size: 17px;
+  -webkit-box-shadow: 0 0 30px #cdcdcd;
+          box-shadow: 0 0 30px #cdcdcd;
+}
+
+div#toster p {
+  margin: 10px 0;
+}
+
+div#toster.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
 }
 /*# sourceMappingURL=style.css.map */

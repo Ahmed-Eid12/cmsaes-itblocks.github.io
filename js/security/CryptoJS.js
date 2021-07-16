@@ -1,5 +1,16 @@
   
-
+function toaster(textColor, backColor, message) {
+	var x = document.getElementById("toster");
+	x.className = "show";
+	setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+  
+	$('#toster p').html(message);
+	$('#toster').css({
+	  "color": textColor,
+	  "background-color": backColor,
+	  "border-radius": 10+"px",
+	})
+  }
 ;(function (root, factory) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -512,7 +523,8 @@
 	            try {
 	                return decodeURIComponent(escape(Latin1.stringify(wordArray)));
 	            } catch (e) {
-					$("#message").html("you try to decrypt wrong Text, try with another key.");
+					$("#file").val('');
+					toaster('white', '#ff4b4b', "can not decrypt text please, choose the right key");
 	                throw new Error('Malformed UTF-8 data');
 	            }
 	        },

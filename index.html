@@ -90,7 +90,7 @@
                                     </div>
                                     
                                 </div>
-                                <p style="color: rgb(255, 67, 67);" id="message"></p>
+                              
                             </div>
                         </div>
 
@@ -140,30 +140,37 @@
 
         </div>
     </div>
+    </div>
 
+       
     <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <textarea name="decrypted_file" id="decrypted_file" cols="42" rows="40"></textarea>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" onclick="save()">
-            <i class="fas fa-cloud-download-alt"></i>
-        </button>
-          <button type="button" class="btn btn-info" id="liveToastBtn"
-           onclick="encryptTxtFileValues()">Encrypt</button>
-        </div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <textarea name="decrypted_file" id="decrypted_file" cols="42" rows="40"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="save()">
+          <i class="fas fa-cloud-download-alt"></i>
+      </button>
+        <button type="button" class="btn btn-info" id="liveToastBtn"
+         onclick="encryptTxtFileValues()">Encrypt</button>
       </div>
     </div>
   </div>
+    
+</div>
 
+<!-- all about toster -->
+<div class="toster " id="toster">
+      <p class="message">ahmed eid is a java developer ...</p>
+</div>
     <script src="js/jquery.min.js"></script>
     <script src="js/propper/propper.min.js"></script>
     <!-- <script src="js/propper/propper.min.js.map"></script> -->
