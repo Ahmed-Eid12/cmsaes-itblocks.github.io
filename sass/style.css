@@ -56,6 +56,10 @@ body {
   text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
 }
 
+.title a {
+  text-shadow: none;
+}
+
 .inputs-row, .buttons {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -91,5 +95,13 @@ body {
         -ms-flex-direction: column;
             flex-direction: column;
   }
+}
+
+a.help {
+  border-radius: 50%;
+}
+
+#accordionExample {
+  margin-top: 20px;
 }
 /*# sourceMappingURL=style.css.map */

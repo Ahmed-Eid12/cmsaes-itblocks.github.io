@@ -1,4 +1,8 @@
 $(document).ready(function () {
+  // popover
+  $('[data-bs-toggle="popover"]').popover();
+
+  // some reserts 
   $("input[type=file]").val("");
   $("#decrypted_file").val("");
   $("#clear").on("click", () => {
